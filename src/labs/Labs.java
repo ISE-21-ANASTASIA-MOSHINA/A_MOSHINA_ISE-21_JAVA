@@ -12,6 +12,10 @@ import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 import javax.swing.JFormattedTextField;
@@ -28,7 +32,7 @@ public class Labs {
 	private UfoPanel panel;
 	private JFormattedTextField formattedTextField;
 	private JList list;
-	
+	private Logger logger;
 	/**
 	 * Launch the application.
 	 */
@@ -47,17 +51,27 @@ public class Labs {
 
 	/**
 	 * Create the application.
+	 * @throws IOException 
+	 * @throws SecurityException 
 	 */
-	public Labs() {
+	public Labs() throws SecurityException, IOException {
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
+	 * @throws SecurityException 
 	 */
-	private void initialize() {
+	private void initialize() throws SecurityException, IOException {
+		//Начало создание логгера на основой форме
+		logger = Logger.getGlobal(); //получение глобального объекта логгера (у логгера на весь проект существует один объект)
+		Handler h = new FileHandler(); //создание файлового обработчика (он будет записывать лог в файл)
+		logger.addHandler(h); //добавление этого обработчика 
+		logger.setUseParentHandlers(false); //Отключение стандартного обработчика (он выводит лог в консоль)
+		//Конец создания логгера
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1225, 907);
+		frame.setBounds(100, 100, 1225, 1000);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -69,6 +83,7 @@ public class Labs {
 		JButton btnNewButton_1 = new JButton("\u0417\u0430\u043A\u0430\u0437\u0430\u0442\u044C \u043A\u043E\u0440\u0430\u0431\u043B\u044C");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				logger.info("Начато создание тарелки");
 				AdditionalForm additionalForm = new AdditionalForm(new UfoCallBack() {
 					@Override
 					public void takeShip(ITransport ship) {
@@ -129,6 +144,8 @@ public class Labs {
 					panel.lvlDown();
 					panel.repaint();
 				}
+				//Пример создания записи в логге (ищи logger.info(...);)
+				logger.info("Попытка понизить уровень. Текущий: " + select);
 			}
 		});
 		btnNewButton_3.setBounds(974, 136, 49, 37);
@@ -143,19 +160,19 @@ public class Labs {
 					panel.lvlUp();
 					panel.repaint();
 				}
+				logger.info("Попытка повысить уровень. Текущий: " + select);
 				
 			}
 		});
 		button.setBounds(1065, 137, 49, 37);
 		frame.getContentPane().add(button);
-		//Начало создания верхнего меню
-		JMenuBar menuBar = new JMenuBar(); //Создание объекта меню
-		JMenu file = new JMenu("Файл"); //Создание влкадки меню 
-		JMenuItem save = new JMenuItem("Сохранить"); //Первый элемент выпадающего списка
-		JMenuItem load = new JMenuItem("Загрузить"); //ВТорой элемент выпадающего списка
+		
+		JMenuBar menuBar = new JMenuBar();
+		JMenu file = new JMenu("Файл");
+		JMenuItem save = new JMenuItem("Сохранить");
+		JMenuItem load = new JMenuItem("Загрузить");
 		save.addActionListener(new ActionListener() {
 			@Override
-			//Метод который вызывает сохранение объекта
 			public void actionPerformed(ActionEvent arg0) {
 				JFileChooser fc = new JFileChooser();  
 				if (fc.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {  
@@ -168,7 +185,6 @@ public class Labs {
 				} 
 			}
 		});
-		//Метод который вызывает загрузку объекта
 		load.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser fc = new JFileChooser();  
@@ -181,6 +197,5 @@ public class Labs {
 		file.add(load);
 		menuBar.add(file);
 		frame.setJMenuBar(menuBar);
-		//Конец создания верхнего меню
 	}
 }
