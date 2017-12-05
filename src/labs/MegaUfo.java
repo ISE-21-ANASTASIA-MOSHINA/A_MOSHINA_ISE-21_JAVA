@@ -17,6 +17,10 @@ public class MegaUfo extends SimpleUfo {
 		this.dopColor = dopColor;
 	}
 	
+	public void setDopColor(Color c) {
+		dopColor = c;
+	}
+	
 	@Override
 	protected void drawMotorShip(Graphics g) {
         super.drawMotorShip(g);
