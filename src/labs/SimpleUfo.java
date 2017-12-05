@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
 import java.util.Random;
-//Базовый класс
 
 public class SimpleUfo extends Ufo{
 	
