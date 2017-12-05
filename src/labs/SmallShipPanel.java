@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-public class SmallUfoPanel extends JPanel {
+public class SmallShipPanel extends JPanel {
 	
 	private ITransport ship;
 	
