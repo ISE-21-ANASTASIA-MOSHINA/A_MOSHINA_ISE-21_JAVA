@@ -11,7 +11,7 @@ public class UfoPanel extends JPanel {
 	
 	public UfoPanel() {
 		super();
-		parking = new Planet();
+		parking = new Planet(5);
 		
 	}
 	@Override
@@ -23,6 +23,14 @@ public class UfoPanel extends JPanel {
 			ship = null;
 		}
 		parking.drawShips(g);
+	}
+	
+	public void lvlUp() {
+		parking.lvlUp();
+	}
+	
+	public void lvlDown() {
+		parking.lvlDown();
 	}
 	
 	public void setShip(ITransport ship) {
