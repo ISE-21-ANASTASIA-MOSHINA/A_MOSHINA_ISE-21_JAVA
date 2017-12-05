@@ -3,6 +3,10 @@ package labs;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class Planet {
@@ -68,6 +72,30 @@ public class Planet {
 
 	public int getCurentLvl() {
 		return curentLvl;
+	}
+	//Метод который сериализует данные (сохраняет) 
+	//Вызов метода смотри в классе Labs
+	public void saveData(String fileName){
+		 try {  
+		        FileOutputStream fileStream = new FileOutputStream(fileName);  
+		        ObjectOutputStream os = new ObjectOutputStream(fileStream);  
+		        os.writeObject(parking);  
+		    }  
+		    catch (Exception e) {
+		    	System.out.println("Нет доступа к файлу");
+		    }
+	}
+	
+	//Метод который десериализует данные (загружает)
+	//Вызов метода смотри в классе Labs
+	public void loadData(String fileName){
+		try {
+			FileInputStream inStream = new FileInputStream(fileName);
+			ObjectInputStream inObject = new ObjectInputStream(inStream);
+			parking = (	ArrayList<ClassArray<ITransport>> )inObject.readObject();
+		} catch (Exception ex) {
+			System.out.println("Умер бинарник");
+		}
 	}
 	
 	

@@ -38,4 +38,14 @@ public class UfoPanel extends JPanel {
 	public ITransport getShip(int index) {
 		return parking.getShipInParking(index);
 	}
+	public void loadParking(String fileName) {
+		this.parking.loadData(fileName);
+		repaint();
+	}
+	
+	
+	public void saveParking(String fileName) {
+		this.parking.saveData(fileName);
+		repaint();
+	}
 }

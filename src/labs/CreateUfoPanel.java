@@ -26,7 +26,6 @@ public class CreateUfoPanel extends JPanel implements DropTargetListener {
 		this.setLayout(null);
 		DraggableLabel lblNewLabel = new DraggableLabel("\u041E\u0441\u043D\u043E\u0432\u043D\u043E\u0439 \u0446\u0432\u0435\u0442",true,new ColorCallBack() {
 			@Override
-			//ћетод измен€ющий основной цвет
 			public void setColor(Color c) {
 				if(ship!=null) {
 					ship.setBodyColor(c);
@@ -40,7 +39,6 @@ public class CreateUfoPanel extends JPanel implements DropTargetListener {
 		lblNewLabel.setBorder(border);
 		DraggableLabel label_9 = new DraggableLabel("\u0414\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0439 \u0446\u0432\u0435\u0442",true, new ColorCallBack() {
 			@Override
-			//ћетод измен€ющий дополнительный цвет 
 			public void setColor(Color c) {
 				if(ship!=null) {
 					if(ship instanceof MegaUfo) {
@@ -84,7 +82,7 @@ public class CreateUfoPanel extends JPanel implements DropTargetListener {
 	public void dragOver(DropTargetDragEvent dtde) {
 
 	}
-	//ќбработчик принимающий виды кораблей 
+	
 	@Override
 	public void drop(DropTargetDropEvent dtde) {
 		try {
