@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Planet {
 	
-	ArrayList<ClassArray<ITransport>> parking; //ОБъект параметризованного класса (дженерика) 
+	ArrayList<ClassArray<ITransport>> parking;
 	private int countPlaces = 20;
 	private int placeSizeWidth = 220;
 	private int placeSizeHeight = 160;
@@ -54,13 +54,12 @@ public class Planet {
 		}
 	}
 	
-	//Метод повышающий уровень
 	public void lvlUp() {
 		if(curentLvl + 1 < parking.size()) {
 			curentLvl++;
 		}
 	}
-	//Метод понижающий уровень
+	
 	public void lvlDown() {
 		if(curentLvl > 0) {
 			curentLvl--;

@@ -1,12 +1,9 @@
 package labs;
 
-import java.io.Serializable;
 import java.util.HashMap;
 
-//Объект который необходимо сериализовать должен имплементировать интерфейс Serializable
-public class ClassArray<T extends ITransport> implements Serializable {
-	//Используемый словарь HashMap
-	private HashMap<Integer,T> places;//ОБъект параметризованного класса (дженерика) 
+public class ClassArray<T extends ITransport> {
+	private HashMap<Integer,T> places;
 	private int maxCount;
 	private T defaultValue;
 	
