@@ -8,12 +8,14 @@ import javax.swing.border.Border;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 
 public class AdditionalForm {
 
 	private JFrame frame;
 	private UfoCallBack scb;
+	private Logger logger;
 	/**
 	 * Create the application.
 	 */
@@ -26,6 +28,7 @@ public class AdditionalForm {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		logger = Logger.getGlobal();
 		frame = new JFrame();
 		frame.setBounds(100, 100, 681, 278);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -107,6 +110,7 @@ public class AdditionalForm {
 						scb.takeShip(panel.getShip());
 					}
 				}
+				logger.info("Создание корабля завершено");
 				frame.dispose();
 			}
 		});
@@ -116,6 +120,7 @@ public class AdditionalForm {
 		JButton btnNewButton_1 = new JButton("\u041E\u0442\u043C\u0435\u043D\u0430");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				logger.info("Создание корабля отменено");
 				frame.dispose();
 			}
 		});

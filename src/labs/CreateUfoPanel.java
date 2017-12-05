@@ -11,6 +11,8 @@ import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.io.IOException;
+import java.util.logging.Logger;
+
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -19,9 +21,10 @@ import javax.swing.border.Border;
 public class CreateUfoPanel extends JPanel implements DropTargetListener {
 
 	private ITransport ship;
-	
+	private Logger logger;
 	public CreateUfoPanel() {
 		super();
+		logger = Logger.getGlobal();
 		new DropTarget(this,this);
 		this.setLayout(null);
 		DraggableLabel lblNewLabel = new DraggableLabel("\u041E\u0441\u043D\u043E\u0432\u043D\u043E\u0439 \u0446\u0432\u0435\u0442",true,new ColorCallBack() {
@@ -29,6 +32,7 @@ public class CreateUfoPanel extends JPanel implements DropTargetListener {
 			public void setColor(Color c) {
 				if(ship!=null) {
 					ship.setBodyColor(c);
+					logger.info("Основной цвет корабля изменен");
 				}
 				repaint();
 			}		
@@ -42,6 +46,7 @@ public class CreateUfoPanel extends JPanel implements DropTargetListener {
 			public void setColor(Color c) {
 				if(ship!=null) {
 					if(ship instanceof MegaUfo) {
+						logger.info("Дополнительный цвет корабля изменен");
 						((MegaUfo) ship).setDopColor(c);
 					}
 				}
@@ -90,9 +95,11 @@ public class CreateUfoPanel extends JPanel implements DropTargetListener {
 		    if (transferable.isDataFlavorSupported(DataFlavor.stringFlavor)) {
 		    	String dragContents = (String) transferable.getTransferData(DataFlavor.stringFlavor);
 		    	if(dragContents.equals("SimpleUFO")) {
+					logger.info("Выбран корабль: SimpleUFO");
 		    		ship = new SimpleUfo(50,5,100,Color.black);
 		    		repaint();
 		    	} else if(dragContents.equals("MegaUFO")) {
+					logger.info("Выбран корабль: MegaUFO");
 		    		ship = new MegaUfo(50,5,100,Color.BLACK,true,true,Color.BLACK);
 		    		repaint();
 		    	} else {

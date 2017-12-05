@@ -25,17 +25,22 @@ public class Planet {
 		} 
 	}
 	
-	public int putShipInParking(ITransport ship) {
+	public int putShipInParking(ITransport ship) throws PlanetOverflowException {
 		return parking.get(curentLvl).addShip(ship);
 	}
 	
-	public ITransport getShipInParking(int ticket) {
+	public ITransport getShipInParking(int ticket) throws PlanetIndexOutOfRangeException {
 		return parking.get(curentLvl).getShip(ticket);
 	}
 	
 	public void drawShips(Graphics g) {
 		for(int i = 0;i<countPlaces;i++) {
-			ITransport ship = parking.get(curentLvl).popShip(i);
+			ITransport ship = null;
+			try {
+				ship = parking.get(curentLvl).popShip(i);
+			} catch (PlanetIndexOutOfRangeException e) {
+				
+			}
 			if(ship!=null) {
 				ship.setPosition(5 + i /5 * placeSizeWidth + 2, i % 5 * placeSizeHeight + 60);
 				ship.drawCar(g);
@@ -73,8 +78,7 @@ public class Planet {
 	public int getCurentLvl() {
 		return curentLvl;
 	}
-	//Метод который сериализует данные (сохраняет) 
-	//Вызов метода смотри в классе Labs
+	
 	public void saveData(String fileName){
 		 try {  
 		        FileOutputStream fileStream = new FileOutputStream(fileName);  
@@ -86,8 +90,6 @@ public class Planet {
 		    }
 	}
 	
-	//Метод который десериализует данные (загружает)
-	//Вызов метода смотри в классе Labs
 	public void loadData(String fileName){
 		try {
 			FileInputStream inStream = new FileInputStream(fileName);

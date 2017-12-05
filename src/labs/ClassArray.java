@@ -3,7 +3,6 @@ package labs;
 import java.io.Serializable;
 import java.util.HashMap;
 
-//Объект который необходимо сериализовать толжен имплементировать интерфейс Serializable
 public class ClassArray<T extends ITransport> implements Serializable {
 	private HashMap<Integer,T> places;
 	private int maxCount;
@@ -14,31 +13,34 @@ public class ClassArray<T extends ITransport> implements Serializable {
 		places = new HashMap<Integer, T>();
 		this.maxCount = size;
 	}
-	
-	public int addShip(T ship) {
+
+	//Метод кидающий ошибку переполнения
+	public int addShip(T ship) throws PlanetOverflowException {
 		for(int i = 0;i<maxCount;i++) {
 			if(checkFreePlace(i)) {
 				places.put(i, ship);
 				return i;
 			}
 		}
-		return -1;
+		throw new PlanetOverflowException();
 	}
 	
-	public T getShip(int index) {
+	//Метод который кидает ошибку отсутсвтия тарелки по индексу
+	public T getShip(int index) throws PlanetIndexOutOfRangeException {
 		if(!checkFreePlace(index)) {
 			T ship = places.get(index);
 			places.remove(index);
 			return ship;
 		}
-		return defaultValue;
+		throw new PlanetIndexOutOfRangeException();
 	}
 	
-	public T popShip(int index) {
+	//Второй метод который кидает ошибку отсутсвтия тарелки по индексу
+	public T popShip(int index) throws PlanetIndexOutOfRangeException {
 		if(!checkFreePlace(index)) {
 			return places.get(index);
 		}
-		return defaultValue;
+		throw new PlanetIndexOutOfRangeException();
 	}
 	
 	private boolean checkFreePlace(int index) {
