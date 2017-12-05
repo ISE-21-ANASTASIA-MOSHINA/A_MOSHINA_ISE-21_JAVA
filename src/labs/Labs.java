@@ -9,12 +9,16 @@ import javax.swing.border.BevelBorder;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
+import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 import javax.swing.JFormattedTextField;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.UIManager;
 
 
@@ -144,5 +148,39 @@ public class Labs {
 		});
 		button.setBounds(1065, 137, 49, 37);
 		frame.getContentPane().add(button);
+		//Начало создания верхнего меню
+		JMenuBar menuBar = new JMenuBar(); //Создание объекта меню
+		JMenu file = new JMenu("Файл"); //Создание влкадки меню 
+		JMenuItem save = new JMenuItem("Сохранить"); //Первый элемент выпадающего списка
+		JMenuItem load = new JMenuItem("Загрузить"); //ВТорой элемент выпадающего списка
+		save.addActionListener(new ActionListener() {
+			@Override
+			//Метод который вызывает сохранение объекта
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser fc = new JFileChooser();  
+				if (fc.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {  
+				    try {  
+				        panel.saveParking(fc.getSelectedFile().getPath()); 
+				    }  
+				    catch (Exception e) {
+				    	System.out.println("Нет доступа к файлу");
+				    }  
+				} 
+			}
+		});
+		//Метод который вызывает загрузку объекта
+		load.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser fc = new JFileChooser();  
+				if (fc.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {  
+					panel.loadParking(fc.getSelectedFile().getPath());
+				}
+			}
+		});
+		file.add(save);
+		file.add(load);
+		menuBar.add(file);
+		frame.setJMenuBar(menuBar);
+		//Конец создания верхнего меню
 	}
 }

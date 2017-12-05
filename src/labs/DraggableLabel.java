@@ -49,8 +49,7 @@ public class DraggableLabel extends JLabel implements DragGestureListener, DragS
     	this.ccb = ccb;
     	
     }
-    
-    //ћетод отправл€ющий необходимое значение
+
     public void dragGestureRecognized(DragGestureEvent evt) {
     	Transferable transferable;
     	if(getText().equals("")) {
@@ -93,8 +92,7 @@ public class DraggableLabel extends JLabel implements DragGestureListener, DragS
 	public void dragOver(DropTargetDragEvent arg0) {
 		
 	}
-	
-	//ќбработчик цвета
+
 	@Override
 	public void drop(DropTargetDropEvent arg0) {
 		try {
@@ -105,7 +103,7 @@ public class DraggableLabel extends JLabel implements DragGestureListener, DragS
 		    		Color c = Color.decode(dragContents);
 		    		super.setBackground(c);
 		    		if(ccb!=null) {
-		    			ccb.setColor(c); //¬ызов метода измен€ющего цвет из класса CreateUfoPanel
+		    			ccb.setColor(c);
 		    		}
 		    	} catch(NumberFormatException e) {
 		    		arg0.rejectDrop();
