@@ -3,7 +3,7 @@ package labs;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
-//Улучшенный класс
+
 public class MegaUfo extends SimpleUfo {
 	
 	private boolean pipe;

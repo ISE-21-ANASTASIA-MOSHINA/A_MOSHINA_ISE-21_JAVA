@@ -7,20 +7,24 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.TitledBorder;
+import javax.swing.JFormattedTextField;
+import javax.swing.UIManager;
+
+//Ключевое слово "super" позволяет обратиться к методам и полям родительского класса.
 
 public class Labs {
 
 	private JFrame frame;
-	private JTextField maxSpeedField;
-	private JTextField maxCountPassengerField;
-	private JTextField weightField;
 	private UfoPanel panel;
+	private JFormattedTextField formattedTextField;
 	/**
 	 * Launch the application.
 	 */
@@ -49,52 +53,22 @@ public class Labs {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 949, 554);
+		frame.setBounds(100, 100, 1175, 907);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		panel = new UfoPanel();
 		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel.setBounds(21, 24, 902, 400);
+		panel.setBounds(25, 11, 884, 806);
 		frame.getContentPane().add(panel);
 		
-		JLabel lblNewLabel = new JLabel("Max speed:");
-		lblNewLabel.setBounds(42, 455, 106, 14);
-		frame.getContentPane().add(lblNewLabel);
-		
-		JLabel lblMaxCountPassenger = new JLabel("Max count passenger:");
-		lblMaxCountPassenger.setBounds(42, 480, 139, 14);
-		frame.getContentPane().add(lblMaxCountPassenger);
-		
-		JLabel lblNewLabel_1 = new JLabel("Weight:");
-		lblNewLabel_1.setBounds(260, 455, 46, 14);
-		frame.getContentPane().add(lblNewLabel_1);
-		
 		JLabel lblColor = new JLabel("Color:");
-		lblColor.setBounds(260, 477, 46, 14);
+		lblColor.setBounds(458, 837, 46, 14);
 		frame.getContentPane().add(lblColor);
 		
 		JLabel lblColor_1 = new JLabel("Color:");
-		lblColor_1.setBounds(372, 480, 46, 14);
+		lblColor_1.setBounds(550, 837, 46, 14);
 		frame.getContentPane().add(lblColor_1);
-		
-		maxSpeedField = new JTextField();
-		maxSpeedField.setText("50");
-		maxSpeedField.setBounds(191, 452, 46, 20);
-		frame.getContentPane().add(maxSpeedField);
-		maxSpeedField.setColumns(10);
-		
-		maxCountPassengerField = new JTextField();
-		maxCountPassengerField.setText("5");
-		maxCountPassengerField.setColumns(10);
-		maxCountPassengerField.setBounds(191, 477, 46, 20);
-		frame.getContentPane().add(maxCountPassengerField);
-		
-		weightField = new JTextField();
-		weightField.setText("100");
-		weightField.setColumns(10);
-		weightField.setBounds(316, 452, 46, 20);
-		frame.getContentPane().add(weightField);
 		
 		JButton bodyColorSwitcher = new JButton("");
 		bodyColorSwitcher.setBackground(Color.BLUE);
@@ -104,7 +78,7 @@ public class Labs {
 				bodyColorSwitcher.setBackground(tmp);
 			}
 		});
-		bodyColorSwitcher.setBounds(316, 474, 46, 23);
+		bodyColorSwitcher.setBounds(494, 828, 46, 23);
 		frame.getContentPane().add(bodyColorSwitcher);
 		
 		JButton dopColorSwitcher = new JButton("");
@@ -115,10 +89,10 @@ public class Labs {
 			}
 		});
 		dopColorSwitcher.setBackground(Color.BLUE);
-		dopColorSwitcher.setBounds(417, 477, 46, 23);
+		dopColorSwitcher.setBounds(585, 828, 46, 23);
 		frame.getContentPane().add(dopColorSwitcher);
 		
-		JButton btnNewButton = new JButton("MotorShip");
+		JButton btnNewButton = new JButton("SimpleUFO");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ITransport s = new SimpleUfo(50,5,100,bodyColorSwitcher.getBackground());
@@ -126,29 +100,47 @@ public class Labs {
 				panel.repaint();
 			}
 		});
-		btnNewButton.setBounds(530, 451, 214, 23);
+		btnNewButton.setBounds(10, 833, 214, 23);
 		frame.getContentPane().add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("UltaMegaBuffSuperMotorShip");
+		JButton btnNewButton_1 = new JButton("MegaUFO");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ITransport s = new MegaUfo(50,5,100,bodyColorSwitcher.getBackground(),
-						true,true,dopColorSwitcher.getBackground());
-				panel.setShip(s);
+				panel.setShip(new MegaUfo(50,5,100,bodyColorSwitcher.getBackground(),
+						true,true,dopColorSwitcher.getBackground()));
 				panel.repaint();
 			}
 		});
-		btnNewButton_1.setBounds(530, 476, 214, 23);
+		btnNewButton_1.setBounds(234, 833, 214, 23);
 		frame.getContentPane().add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton("MOVE");
+		SmallUfoPanel panel_1 = new SmallUfoPanel();
+		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\u0422\u0430\u0440\u0435\u043B\u043A\u0430", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_1.setBounds(919, 188, 230, 221);
+		frame.getContentPane().add(panel_1);
+		panel_1.setLayout(null);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(10, 62, 210, 148);
+		panel_1.add(panel_2);
+		
+		JButton btnNewButton_2 = new JButton("\u0417\u0430\u0431\u0440\u0430\u0442\u044C");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panel.getShip().moveCar();
+				panel_1.setShip(panel.getShip(Integer.parseInt(formattedTextField.getText())-1));
+				panel_1.repaint();
 				panel.repaint();
 			}
 		});
-		btnNewButton_2.setBounds(778, 450, 106, 44);
-		frame.getContentPane().add(btnNewButton_2);
+		btnNewButton_2.setBounds(135, 28, 85, 23);
+		panel_1.add(btnNewButton_2);
+		
+		JLabel label = new JLabel("\u041C\u0435\u0441\u0442\u043E:");
+		label.setBounds(10, 35, 46, 14);
+		panel_1.add(label);
+		
+		formattedTextField = new JFormattedTextField();
+		formattedTextField.setBounds(66, 29, 46, 20);
+		panel_1.add(formattedTextField);
 	}
 }

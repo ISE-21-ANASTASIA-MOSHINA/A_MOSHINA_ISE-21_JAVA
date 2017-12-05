@@ -2,7 +2,7 @@ package labs;
 
 import java.awt.Color;
 import java.awt.Graphics;
-//Абстрактный класс
+
 public abstract class Ufo implements ITransport {
 
 	protected int posX;
